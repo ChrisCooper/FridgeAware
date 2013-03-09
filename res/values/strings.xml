@@ -2,6 +2,6 @@
 <resources>
 
     <string name="app_name">FridgeAware</string>
-    <string name="title_fooditem_detail">FoodItem Detail</string>
+    <string name="title_fooditem_detail">Your Fridge</string>
 
 </resources>
