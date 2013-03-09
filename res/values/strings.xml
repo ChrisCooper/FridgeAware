@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FridgeAware</string>
+    <string name="title_fooditem_detail">FoodItem Detail</string>
+
+</resources>
