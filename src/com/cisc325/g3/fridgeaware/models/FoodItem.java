@@ -1,6 +1,10 @@
 package com.cisc325.g3.fridgeaware.models;
 
+import java.util.ArrayList;
+
 public class FoodItem {
+	
+	public static ArrayList<FoodItem> values = new ArrayList<FoodItem>();
 
 	private String name;
 	
@@ -14,6 +18,10 @@ public class FoodItem {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String toString() {
+		return new String(name);
 	}
 	
 }

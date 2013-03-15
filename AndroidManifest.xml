@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.cisc325.g3.fridgeaware.AddItemActivity"
+            android:label="@string/title_activity_add_item"
+            android:parentActivityName="com.cisc325.g3.fridgeaware.FoodItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cisc325.g3.fridgeaware.FoodItemListActivity" />
+        </activity>
     </application>
 
 </manifest>
