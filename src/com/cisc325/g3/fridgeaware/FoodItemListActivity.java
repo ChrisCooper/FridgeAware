@@ -29,8 +29,8 @@ public class FoodItemListActivity extends Activity {
         FoodItem.values.add(new FoodItem("Potatoes", null));
         FoodItem.values.add(new FoodItem("Lettuce", null));
         
-        adapter = new ArrayAdapter<FoodItem>(this,
-        		android.R.layout.simple_list_item_1, android.R.id.text1, FoodItem.values);
+        adapter = new FoodItemAdapter(this,
+        		android.R.layout.activity_list_item, FoodItem.values);
         
         listview.setAdapter(adapter);
         
