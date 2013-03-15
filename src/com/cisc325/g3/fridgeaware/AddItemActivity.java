@@ -1,5 +1,7 @@
 package com.cisc325.g3.fridgeaware;
 
+import java.util.Date;
+
 import com.cisc325.g3.fridgeaware.models.FoodItem;
 
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
@@ -41,7 +44,13 @@ public class AddItemActivity extends Activity {
 				EditText nameEditText = (EditText) findViewById(R.id.edittext_name);
 				String name = nameEditText.getText().toString();
 				
-				FoodItem.values.add(new FoodItem(name, null));
+				DatePicker expiryPicker = (DatePicker) findViewById(R.id.picker_expiry);
+				
+				Date expiryDate = new Date(expiryPicker.getYear(),
+						expiryPicker.getMonth(),
+						expiryPicker.getDayOfMonth());
+				
+				FoodItem.values.add(new FoodItem(name, expiryDate));
 				
 				finish();
 				

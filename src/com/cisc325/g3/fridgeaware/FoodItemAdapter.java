@@ -37,8 +37,8 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem>{
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new FoodItemHolder();
-            holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
+            holder.expiryTitle = (TextView)row.findViewById(R.id.expiryTitle);
             
             row.setTag(holder);
         }
@@ -49,16 +49,14 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem>{
         
         FoodItem foodItem = foodItems.get(position);
         holder.txtTitle.setText(foodItem.getName());
-        
-        //Use this line to set the picture later
-        //holder.imgIcon.setImageResource(foodItem.icon);
+        holder.expiryTitle.setText(foodItem.getDateString());
         
         return row;
     }
     
     static class FoodItemHolder
     {
-        ImageView imgIcon;
         TextView txtTitle;
+        TextView expiryTitle;
     }
 }

@@ -25,12 +25,12 @@ public class FoodItemListActivity extends Activity {
         //Populate ListView...
         ListView listview = (ListView) findViewById(R.id.foodlist);
         
-        FoodItem.values.add(new FoodItem("Apple", null));
-        FoodItem.values.add(new FoodItem("Potatoes", null));
-        FoodItem.values.add(new FoodItem("Lettuce", null));
+        FoodItem.values.add(new FoodItem("Apple"));
+        FoodItem.values.add(new FoodItem("Potatoes"));
+        FoodItem.values.add(new FoodItem("Lettuce"));
         
         adapter = new FoodItemAdapter(this,
-        		android.R.layout.activity_list_item, FoodItem.values);
+        		R.layout.food_item_cell, FoodItem.values);
         
         listview.setAdapter(adapter);
         
