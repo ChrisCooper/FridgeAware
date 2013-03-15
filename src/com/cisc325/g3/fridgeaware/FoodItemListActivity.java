@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,29 +25,15 @@ public class FoodItemListActivity extends Activity {
         //Populate ListView...
         ListView listview = (ListView) findViewById(R.id.foodlist);
         
-        FoodItem.values.add(new FoodItem("Apple"));
-        FoodItem.values.add(new FoodItem("Potatoes"));
-        FoodItem.values.add(new FoodItem("Lettuce"));
+        FoodItem.values.add(new FoodItem("Apple", null));
+        FoodItem.values.add(new FoodItem("Potatoes", null));
+        FoodItem.values.add(new FoodItem("Lettuce", null));
         
         adapter = new ArrayAdapter<FoodItem>(this,
         		android.R.layout.simple_list_item_1, android.R.id.text1, FoodItem.values);
         
         listview.setAdapter(adapter);
         
-        //Attach Add Item Button Listener...
-        Button addItemButton = (Button) findViewById(R.id.button_add_item);
-        
-        addItemButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
-				
-				startActivity(intent);
-				
-			}
-		});
         
     }
     
@@ -65,6 +52,23 @@ public class FoodItemListActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.food_item_list, menu);
         return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	
+    	//Attach Add Item Button Listener...
+    	switch(item.getItemId()) {
+    	
+	    	case R.id.action_add_item:
+	    		Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
+				startActivity(intent);
+	    		return true;
+	    	default:
+	    		return super.onOptionsItemSelected(item);
+    	
+    	}
+    	
     }
     
 }

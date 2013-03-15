@@ -8,6 +8,12 @@
     <string name="title_activity_add_item">Add Item</string>
     <string name="edit_name_hint">Enter a Name...</string>
     <string name="edit_name_label">Name:</string>
+    <string name="edit_picture_label">Picture:</string>
+    <string name="edit_notifications_label">Notifcation Settings:</string>
+    <string name="edit_category_label">Category:</string>
+    <string name="edit_category_hint">Enter a Category...</string>
     <string name="button_done">Done</string>
+    <string name="edit_expiry_label">Expiry Date:</string>
+    <string name="button_cancel">Cancel</string>
 
 </resources>

@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.support.v4.app.NavUtils;
 
 public class AddItemActivity extends Activity {
@@ -21,6 +23,14 @@ public class AddItemActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		//Notification Settings Spinner...
+		Spinner spinner = (Spinner) findViewById(R.id.spinner_notifications);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.notifications_spinner_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+		
+		//Done Button...
 		Button doneButton = (Button) findViewById(R.id.button_done);
 		
 		doneButton.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +41,20 @@ public class AddItemActivity extends Activity {
 				EditText nameEditText = (EditText) findViewById(R.id.edittext_name);
 				String name = nameEditText.getText().toString();
 				
-				FoodItem.values.add(new FoodItem(name));
+				FoodItem.values.add(new FoodItem(name, null));
+				
+				finish();
+				
+			}
+		});
+		
+		//Cancel Button...
+		Button cancelButton = (Button) findViewById(R.id.button_cancel);
+		
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				
 				finish();
 				
