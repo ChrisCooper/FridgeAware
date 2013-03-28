@@ -84,12 +84,14 @@ public class FoodItemDataSource {
 	        + " = " + id, null);
 	  }
 	
-
+	
 	private FoodItem cursorToFoodItem(Cursor cursor) {
 		FoodItem item = new FoodItem();
 		item.setId(cursor.getLong(0));
 		item.setName(cursor.getString(1));
-		item.setDate(new Date(cursor.getLong(2)));
+		
+		item.setDate(new Date(Date.parse(cursor.getString(2))));
+		
 		item.setNotificationSetting(cursor.getInt(3));
 		item.setCategory(cursor.getInt(4));
 		

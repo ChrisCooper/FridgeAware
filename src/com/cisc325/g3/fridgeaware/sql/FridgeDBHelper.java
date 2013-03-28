@@ -26,7 +26,7 @@ public class FridgeDBHelper extends SQLiteOpenHelper {
 	    + FOODITEM_TABLE_NAME + "("
 	    	+ FOODITEM_COLUMN_ID + " integer primary key autoincrement, "
 		    + FOODITEM_COLUMN_NAME + " text not null, "
-		    + FOODITEM_COLUMN_EXPIRY + " date not null, "
+		    + FOODITEM_COLUMN_EXPIRY + " text not null, "
 		    + FOODITEM_COLUMN_NOTIFICATION_SETTING + " integer not null, "
 		    + FOODITEM_COLUMN_CATEGORY + " integer not null"
 	    + ");";
