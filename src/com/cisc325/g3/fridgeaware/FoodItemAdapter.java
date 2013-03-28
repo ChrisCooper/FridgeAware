@@ -1,6 +1,7 @@
 package com.cisc325.g3.fridgeaware;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +18,9 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem>{
 
     Context context; 
     int layoutResourceId;
-    ArrayList<FoodItem> foodItems;
+    List<FoodItem> foodItems;
     
-    public FoodItemAdapter(Context context, int layoutResourceId, ArrayList<FoodItem> foodItems) {
+    public FoodItemAdapter(Context context, int layoutResourceId, List<FoodItem> foodItems) {
         super(context, layoutResourceId, foodItems);
         this.layoutResourceId = layoutResourceId;
         this.context = context;

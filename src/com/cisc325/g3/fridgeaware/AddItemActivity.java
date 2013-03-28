@@ -3,6 +3,7 @@ package com.cisc325.g3.fridgeaware;
 import java.util.Date;
 
 import com.cisc325.g3.fridgeaware.models.FoodItem;
+import com.cisc325.g3.fridgeaware.sql.FoodItemDataSource;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -50,7 +51,10 @@ public class AddItemActivity extends Activity {
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
 				
-				FoodItem.values.add(new FoodItem(name, expiryDate));
+				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
+		        datasource.open();
+		        
+		        datasource.createFoodItem(name, expiryDate, 0, 0);
 				
 				finish();
 				

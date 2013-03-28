@@ -4,13 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class FoodItem {
-	
-	public static ArrayList<FoodItem> values = new ArrayList<FoodItem>();
 
+	private long id;
 	private String name;
 	private Date expiry;
+	private int notificationSetting;
+	private int category;
 	
 	private static SimpleDateFormat date_format = new SimpleDateFormat("MMMM d");
+	
+	public FoodItem() {
+	}
 	
 	public FoodItem(String name) {
 		this.name = name;
@@ -44,6 +48,30 @@ public class FoodItem {
 	
 	public String toString() {
 		return new String(name);
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getNotificationSetting() {
+		return notificationSetting;
+	}
+
+	public void setNotificationSetting(int notificationSetting) {
+		this.notificationSetting = notificationSetting;
+	}
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
 	}
 	
 }

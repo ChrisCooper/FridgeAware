@@ -1,6 +1,9 @@
 package com.cisc325.g3.fridgeaware;
 
+import java.util.List;
+
 import com.cisc325.g3.fridgeaware.models.*;
+import com.cisc325.g3.fridgeaware.sql.FoodItemDataSource;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,6 +18,7 @@ import android.widget.ListView;
 public class FoodItemListActivity extends Activity {
 
 	private ArrayAdapter<FoodItem> adapter;
+	private FoodItemDataSource datasource;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +26,16 @@ public class FoodItemListActivity extends Activity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_item_list);
         
+        datasource = new FoodItemDataSource(this);
+        datasource.open();
+
+        List<FoodItem> items = datasource.getAllFoodItems();
+        
         //Populate ListView...
         ListView listview = (ListView) findViewById(R.id.foodlist);
         
-        FoodItem.values.add(new FoodItem("Apple"));
-        FoodItem.values.add(new FoodItem("Potatoes"));
-        FoodItem.values.add(new FoodItem("Lettuce"));
-        
         adapter = new FoodItemAdapter(this,
-        		R.layout.food_item_cell, FoodItem.values);
+        		R.layout.food_item_cell, items);
         
         listview.setAdapter(adapter);
         
