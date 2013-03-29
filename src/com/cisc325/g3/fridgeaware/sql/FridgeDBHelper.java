@@ -14,7 +14,7 @@ public class FridgeDBHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	
 	public static final String FOODITEM_TABLE_NAME = "fooditems";
-	public static final String FOODITEM_COLUMN_ID = "id";
+	public static final String FOODITEM_COLUMN_ID = "_id";
 	public static final String FOODITEM_COLUMN_NAME = "name";
 	public static final String FOODITEM_COLUMN_EXPIRY = "expiry";
 	public static final String FOODITEM_COLUMN_NOTIFICATION_SETTING = "notification_setting";

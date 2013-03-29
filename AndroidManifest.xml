@@ -30,6 +30,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cisc325.g3.fridgeaware.FoodItemListActivity" />
         </activity>
+        <activity
+            android:name="com.cisc325.g3.fridgeaware.SearchableActivity"
+            android:label="@string/title_activity_searchable" >
+            <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+            <meta-data 
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"
+            />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>

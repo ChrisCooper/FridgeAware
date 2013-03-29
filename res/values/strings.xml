@@ -15,5 +15,9 @@
     <string name="button_done">Done</string>
     <string name="edit_expiry_label">Expiry Date:</string>
     <string name="button_cancel">Cancel</string>
+    <string name="search_hint">Search food items</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_search">menu_search</string>
+    <string name="title_activity_searchable">SearchableActivity</string>
 
 </resources>

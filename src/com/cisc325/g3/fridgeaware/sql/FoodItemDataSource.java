@@ -11,6 +11,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.widget.CursorAdapter;
 
 public class FoodItemDataSource {
 	private SQLiteDatabase database;
@@ -96,5 +97,25 @@ public class FoodItemDataSource {
 		item.setCategory(cursor.getInt(4));
 		
 	    return item;
+	}
+
+	public List<FoodItem> searchFoodItems(String query) {
+
+		List<FoodItem> items = new ArrayList<FoodItem>();
+		
+	    Cursor cursor = database.query(FridgeDBHelper.FOODITEM_TABLE_NAME,
+	    		allColumns, "name like '%" + query + "%'", null, null, null, FridgeDBHelper.FOODITEM_COLUMN_NAME);
+	    
+	    cursor.moveToFirst();
+	    while (!cursor.isAfterLast()) {
+	    	FoodItem item = cursorToFoodItem(cursor);
+	    	items.add(item);
+	    	cursor.moveToNext();
+	    }
+	    
+	    // Make sure to close the cursor
+	    cursor.close();
+	    
+	    return items;
 	}
 }
