@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
+    <!--  <item
         android:id="@+id/action_add_item"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/button_additem" />
+        android:title="@string/button_additem" /> -->
     
     <item android:id="@+id/menu_search"
         android:title="@string/menu_search"
-        android:showAsAction="ifRoomcollaposeActionView"
-        android:actionViewClass="android.widget.SearchView" />
+        android:actionViewClass="android.widget.SearchView"
+        android:showAsAction="ifRoom|withText"/>
+        
 </menu>

@@ -14,6 +14,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class SearchableActivity extends ListActivity {
 
@@ -32,13 +33,17 @@ public class SearchableActivity extends ListActivity {
 
 
 	private void searchFoodItems(String query) {
+		
 		FoodItemDataSource datasource = new FoodItemDataSource(this);
+		datasource.open();
+		
 		List<FoodItem> items = datasource.searchFoodItems(query);
-		ArrayAdapter adapter = new FoodItemAdapter(this,
-        		R.layout.food_item_cell, items);
-		setListAdapter(adapter);
+		
+		datasource.close();
+        
+        ((FoodItemListActivity) getParent()).searchUpdateArrayAdapter(items);
+		
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

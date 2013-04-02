@@ -29,31 +29,27 @@ public class FoodItemListActivity extends Activity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_item_list);
         
-        datasource = new FoodItemDataSource(this);
-        datasource.open();
-
-        List<FoodItem> items = datasource.getAllFoodItems();
-        
-        //Populate ListView...
-        ListView listview = (ListView) findViewById(R.id.foodlist);
-        
-        adapter = new FoodItemAdapter(this,
-        		R.layout.food_item_cell, items);
-        
-        listview.setAdapter(adapter);
-        
+        dBUpdateArrayAdapter();
         
     }
     
     @Override
     public void onResume() {
     	
-    	adapter.notifyDataSetChanged();
+    	dBUpdateArrayAdapter();
     	
     	super.onResume();
     	
     }
-
+    
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	
+    	dBUpdateArrayAdapter();
+    	
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,14 +71,50 @@ public class FoodItemListActivity extends Activity {
     	//Attach Add Item Button Listener...
     	switch(item.getItemId()) {
     	
-	    	case R.id.action_add_item:
-	    		Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
-				startActivity(intent);
-	    		return true;
+	    	//case R.id.action_add_item:
+	    	//	Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
+			//	startActivityForResult(intent, 0);
+	    	//	return true;
 	    	default:
 	    		return super.onOptionsItemSelected(item);
     	
     	}
+    	
+    }
+    
+    public ArrayAdapter<FoodItem> getFoodItemAdapter() {
+    	
+    	return adapter;
+    	
+    }
+    
+    public void searchUpdateArrayAdapter(List<FoodItem> items) {
+    	
+    	ListView listview = (ListView) findViewById(R.id.foodlist);
+    	
+    	adapter = new FoodItemAdapter(this,
+        		R.layout.food_item_cell, items);
+    	
+        listview.setAdapter(adapter);
+    	
+    }
+    
+    private void dBUpdateArrayAdapter() {
+    	
+    	datasource = new FoodItemDataSource(this);
+        datasource.open();
+    	
+    	List<FoodItem> items = datasource.getAllFoodItems();
+        
+        //Populate ListView...
+        ListView listview = (ListView) findViewById(R.id.foodlist);
+        
+        adapter = new FoodItemAdapter(this,
+        		R.layout.food_item_cell, items);
+    	
+        listview.setAdapter(adapter);
+    	
+    	datasource.close();
     	
     }
     
