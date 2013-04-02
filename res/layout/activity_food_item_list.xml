@@ -5,10 +5,32 @@
     tools:context=".FoodItemListActivity"
     android:orientation="vertical">
 
+    <GridView
+	    android:id="@+id/buttonsTopGridView"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="55dp"
+	    android:columnWidth="90dp"
+	    android:numColumns="auto_fit"
+	    android:verticalSpacing="10dp"
+	    android:horizontalSpacing="10dp"
+	    android:stretchMode="columnWidth"
+    	android:gravity="center"/>
+    
     <ListView
         android:id="@+id/foodlist"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
     </ListView>
+    
+    <GridView
+	    android:id="@+id/buttonsBottomGridView"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="55dp"
+	    android:columnWidth="90dp"
+	    android:numColumns="auto_fit"
+	    android:verticalSpacing="10dp"
+	    android:horizontalSpacing="10dp"
+	    android:stretchMode="columnWidth"
+    	android:gravity="center"/>
     
 </LinearLayout>

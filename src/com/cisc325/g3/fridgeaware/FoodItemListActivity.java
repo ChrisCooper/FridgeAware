@@ -29,6 +29,8 @@ public class FoodItemListActivity extends Activity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_item_list);
         
+        //searchFoodItems(getIntent());
+        
         dBUpdateArrayAdapter();
         
     }
@@ -36,7 +38,7 @@ public class FoodItemListActivity extends Activity {
     @Override
     public void onResume() {
     	
-    	dBUpdateArrayAdapter();
+    	//dBUpdateArrayAdapter();
     	
     	super.onResume();
     	
@@ -71,10 +73,10 @@ public class FoodItemListActivity extends Activity {
     	//Attach Add Item Button Listener...
     	switch(item.getItemId()) {
     	
-	    	//case R.id.action_add_item:
-	    	//	Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
-			//	startActivityForResult(intent, 0);
-	    	//	return true;
+	    	case R.id.action_add_item:
+	    		Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
+				startActivityForResult(intent, 0);
+	    		return true;
 	    	default:
 	    		return super.onOptionsItemSelected(item);
     	
@@ -117,5 +119,32 @@ public class FoodItemListActivity extends Activity {
     	datasource.close();
     	
     }
+    
+    @Override
+    public void onNewIntent(Intent intent) {
+    	
+    	//setIntent(intent);
+    	searchFoodItems(intent);
+    	
+  	}
+
+  	private void searchFoodItems(Intent intent) {
+  		
+  		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+  			
+    	    String query = intent.getStringExtra(SearchManager.QUERY);
+  		
+	  		FoodItemDataSource datasource = new FoodItemDataSource(this);
+	  		datasource.open();
+	  		
+	  		List<FoodItem> items = datasource.searchFoodItems(query);
+	  		
+	  		datasource.close();
+	          
+	        searchUpdateArrayAdapter(items);
+        
+  		}
+  		
+  	}
     
 }
