@@ -7,6 +7,9 @@ import com.cisc325.g3.fridgeaware.sql.FoodItemDataSource;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,17 +50,21 @@ public class AddItemActivity extends Activity {
 				
 				DatePicker expiryPicker = (DatePicker) findViewById(R.id.add_picker_expiry);
 				
-				Date expiryDate = new Date(expiryPicker.getYear(),
+				Date expiryDate = new Date(2013,//expiryPicker.getYear(),
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
+				expiryDate.setHours(19);
+				expiryDate.setMinutes(22);
 				
 				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
 		        datasource.open();
 		        
-		        datasource.createFoodItem(name, expiryDate, 0, 0);
-				
+		        FoodItem foodItem = datasource.createFoodItem(name, expiryDate, 0, 0);
+		        
+		        NotificationService noteService = new NotificationService(AddItemActivity.this);
+		        noteService.scheduleExpiryWarning(expiryDate, foodItem);
+		        				
 				finish();
-				
 			}
 		});
 		

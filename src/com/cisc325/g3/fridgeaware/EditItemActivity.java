@@ -64,6 +64,7 @@ public class EditItemActivity extends Activity {
 				Date expiryDate = new Date(expiryPicker.getYear(),
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
+				expiryDate.setHours(12);
 				
 				FoodItemDataSource datasource = new FoodItemDataSource(EditItemActivity.this);
 		        datasource.open();
