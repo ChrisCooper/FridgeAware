@@ -12,7 +12,7 @@
         android:text="@string/edit_name_label" />
     
     <EditText
-        android:id="@+id/add_name"
+        android:id="@+id/edit_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="220dp"
@@ -24,7 +24,7 @@
         android:text="@string/edit_expiry_label" />
     
     <DatePicker
-        android:id="@+id/add_picker_expiry"
+        android:id="@+id/edit_picker_expiry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     
@@ -34,7 +34,7 @@
         android:text="@string/edit_notifications_label" />
     
     <Spinner
-	    android:id="@+id/add_spinner_notifications"
+	    android:id="@+id/edit_spinner_notifications"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" />
     
@@ -44,7 +44,7 @@
         android:text="@string/edit_category_label" />
     
     <EditText
-        android:id="@+id/add_text_category"
+        android:id="@+id/edit_text_category"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="220dp"
@@ -55,17 +55,29 @@
 	    android:layout_height="fill_parent"
 	    android:orientation="horizontal">
 	    <Button
-	        android:id="@+id/add_button_cancel"
+	        android:id="@+id/edit_button_cancel"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:text="@string/button_cancel"/>
 	    <Button
-	        android:id="@+id/add_button_done"
+	        android:id="@+id/edit_button_done"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:text="@string/button_done"/>
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal">
+	    <Button
+	        android:id="@+id/edit_button_remove"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/button_remove"/>
     </LinearLayout>
     
 </LinearLayout>

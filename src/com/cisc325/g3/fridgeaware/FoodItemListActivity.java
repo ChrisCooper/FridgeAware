@@ -1,5 +1,6 @@
 package com.cisc325.g3.fridgeaware;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cisc325.g3.fridgeaware.models.*;
@@ -10,11 +11,15 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -29,7 +34,36 @@ public class FoodItemListActivity extends Activity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_item_list);
         
-        //searchFoodItems(getIntent());
+        Button addItemButton = (Button) findViewById(R.id.button_add_item);
+        
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
+				startActivityForResult(intent, 0);
+				
+			}
+		});
+        
+        ListView lv = (ListView) findViewById(R.id.foodlist);
+        
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        	
+        	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        		
+        		FoodItemAdapter.FoodItemHolder h = (FoodItemAdapter.FoodItemHolder) view.getTag();
+        		long foodItemID = h.foodItem.getId();
+        		
+        		Intent intent = new Intent(FoodItemListActivity.this, EditItemActivity.class);
+        		intent.putExtra("ID", foodItemID);
+        		
+        		startActivityForResult(intent, 1);
+        		
+        	}
+        	
+		});
         
         dBUpdateArrayAdapter();
         
@@ -64,7 +98,32 @@ public class FoodItemListActivity extends Activity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				
+				FoodItemDataSource datasource = new FoodItemDataSource(FoodItemListActivity.this);
+		  		datasource.open();
+		  		
+		  		List<FoodItem> items = datasource.searchFoodItems(newText);
+		  		
+		  		datasource.close();
+		          
+		        searchUpdateArrayAdapter(items);
+				
+				return false;
+			}
+		});
+        
         return true;
+        
     }
     
     @Override
@@ -73,10 +132,6 @@ public class FoodItemListActivity extends Activity {
     	//Attach Add Item Button Listener...
     	switch(item.getItemId()) {
     	
-	    	case R.id.action_add_item:
-	    		Intent intent = new Intent(FoodItemListActivity.this, AddItemActivity.class);
-				startActivityForResult(intent, 0);
-	    		return true;
 	    	default:
 	    		return super.onOptionsItemSelected(item);
     	
@@ -124,7 +179,7 @@ public class FoodItemListActivity extends Activity {
     public void onNewIntent(Intent intent) {
     	
     	//setIntent(intent);
-    	searchFoodItems(intent);
+    	//searchFoodItems(intent);
     	
   	}
 

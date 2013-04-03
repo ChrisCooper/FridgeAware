@@ -54,6 +54,26 @@ public class FoodItemDataSource {
 	    return items;
 	}
 	
+	public FoodItem getFoodItem(long id) {
+		
+		FoodItem item = null;
+
+	    Cursor cursor = database.query(FridgeDBHelper.FOODITEM_TABLE_NAME,
+	    		allColumns, FridgeDBHelper.FOODITEM_COLUMN_ID + " = " + id, null, null, null, null);
+	    
+	    cursor.moveToFirst();
+	    while (!cursor.isAfterLast()) {
+	    	item = cursorToFoodItem(cursor);
+	    	cursor.moveToNext();
+	    }
+	    
+	    // Make sure to close the cursor
+	    cursor.close();
+		
+	    return item;
+		
+	}
+	
 	public FoodItem createFoodItem(String name, Date expiryDate, int notificationSetting, int category) {
 	    ContentValues values = new ContentValues();
 	    
@@ -76,15 +96,27 @@ public class FoodItemDataSource {
 	    cursor.close();
 	    
 	    return newItem;
-	  }
+	}
+	
+	public void updateFoodItem(long id, String name, Date expiryDate, int notificationSetting, int category) {
+		
+		ContentValues values = new ContentValues();
+	    
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NAME, name);
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, expiryDate.toString());
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING, notificationSetting);
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_CATEGORY, category);
+	    
+	    database.update(FridgeDBHelper.FOODITEM_TABLE_NAME, values, FridgeDBHelper.FOODITEM_COLUMN_ID + " = " + id, null);
+		
+	}
 
-	  public void deleteFoodItem(FoodItem item) {
-	    long id = item.getId();
-	    System.out.println("Food item deleted with id: " + id);
+	public void deleteFoodItem(FoodItem item) {
+		long id = item.getId();
+		System.out.println("Food item deleted with id: " + id);
 	    database.delete(FridgeDBHelper.FOODITEM_TABLE_NAME, FridgeDBHelper.FOODITEM_COLUMN_ID
 	        + " = " + id, null);
-	  }
-	
+	}
 	
 	private FoodItem cursorToFoodItem(Cursor cursor) {
 		FoodItem item = new FoodItem();

@@ -51,13 +51,15 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem>{
         FoodItem foodItem = foodItems.get(position);
         holder.txtTitle.setText(foodItem.getName());
         holder.expiryTitle.setText(foodItem.getDateString());
+        holder.foodItem = foodItem;
         
         return row;
     }
     
-    static class FoodItemHolder
+    public static class FoodItemHolder
     {
         TextView txtTitle;
         TextView expiryTitle;
+        FoodItem foodItem;
     }
 }

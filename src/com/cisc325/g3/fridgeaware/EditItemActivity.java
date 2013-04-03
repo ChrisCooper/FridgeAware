@@ -2,12 +2,12 @@ package com.cisc325.g3.fridgeaware;
 
 import java.util.Date;
 
-import com.cisc325.g3.fridgeaware.models.FoodItem;
 import com.cisc325.g3.fridgeaware.sql.FoodItemDataSource;
+import com.cisc325.g3.fridgeaware.models.FoodItem;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,45 +16,61 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.support.v4.app.NavUtils;
 
-public class AddItemActivity extends Activity {
+public class EditItemActivity extends Activity {
+	
+	private FoodItem foodItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_item);
+		setContentView(R.layout.activity_edit_item);
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		//Populate existing fields...
+		FoodItemDataSource datasource = new FoodItemDataSource(EditItemActivity.this);
+  		datasource.open();
+  		
+		foodItem = datasource.getFoodItem(getIntent().getLongExtra("ID",-1));
+		
+		((EditText) findViewById(R.id.edit_name)).setText((CharSequence)foodItem.getName());
+		((DatePicker) findViewById(R.id.edit_picker_expiry)).updateDate(foodItem.getDate().getYear(),
+				foodItem.getDate().getMonth(),
+				foodItem.getDate().getDate());
+		
+		datasource.close();
+		
 		//Notification Settings Spinner...
-		Spinner spinner = (Spinner) findViewById(R.id.add_spinner_notifications);
+		Spinner spinner = (Spinner) findViewById(R.id.edit_spinner_notifications);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.notifications_spinner_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		
 		//Done Button...
-		Button doneButton = (Button) findViewById(R.id.add_button_done);
+		Button doneButton = (Button) findViewById(R.id.edit_button_done);
 		
 		doneButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				
-				EditText nameEditText = (EditText) findViewById(R.id.add_name);
+				EditText nameEditText = (EditText) findViewById(R.id.edit_name);
 				String name = nameEditText.getText().toString();
 				
-				DatePicker expiryPicker = (DatePicker) findViewById(R.id.add_picker_expiry);
+				DatePicker expiryPicker = (DatePicker) findViewById(R.id.edit_picker_expiry);
 				
 				Date expiryDate = new Date(expiryPicker.getYear(),
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
 				
-				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
+				FoodItemDataSource datasource = new FoodItemDataSource(EditItemActivity.this);
 		        datasource.open();
 		        
-		        datasource.createFoodItem(name, expiryDate, 0, 0);
+		        datasource.updateFoodItem(foodItem.getId(), name, expiryDate, 0, 0);
+		        
+		        datasource.close();
 				
 				finish();
 				
@@ -62,7 +78,7 @@ public class AddItemActivity extends Activity {
 		});
 		
 		//Cancel Button...
-		Button cancelButton = (Button) findViewById(R.id.add_button_cancel);
+		Button cancelButton = (Button) findViewById(R.id.edit_button_cancel);
 		
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -88,7 +104,7 @@ public class AddItemActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_item, menu);
+		getMenuInflater().inflate(R.menu.edit_item, menu);
 		return true;
 	}
 

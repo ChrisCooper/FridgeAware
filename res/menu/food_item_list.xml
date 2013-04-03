@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >   
     
     <item android:id="@+id/menu_search"
         android:title="@string/menu_search"
         android:showAsAction="ifRoom|withText"
         android:actionViewClass="android.widget.SearchView" />
-    
-    <item
-        android:id="@+id/action_add_item"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/button_additem" />
-
-<!--android:showAsAction="ifRoom|withText"-->
 
 </menu>
