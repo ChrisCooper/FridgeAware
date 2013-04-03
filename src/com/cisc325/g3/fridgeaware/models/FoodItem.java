@@ -13,6 +13,8 @@ public class FoodItem {
 	
 	private static SimpleDateFormat date_format = new SimpleDateFormat("MMMM d");
 	
+	public static final SimpleDateFormat database_format = new SimpleDateFormat("yyyy/MM/dd");
+	
 	public FoodItem() {
 	}
 	

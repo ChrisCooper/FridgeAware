@@ -1,5 +1,6 @@
 package com.cisc325.g3.fridgeaware.sql;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,10 @@ public class FoodItemDataSource {
 	    ContentValues values = new ContentValues();
 	    
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NAME, name);
-	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, expiryDate.toString());
+	    
+	    String date_string = FoodItem.database_format.format(expiryDate);
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, date_string);
+	    
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING, notificationSetting);
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_CATEGORY, category);
 	    
@@ -103,7 +107,8 @@ public class FoodItemDataSource {
 		ContentValues values = new ContentValues();
 	    
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NAME, name);
-	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, expiryDate.toString());
+	    String date_string = FoodItem.database_format.format(expiryDate);
+	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, date_string);
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING, notificationSetting);
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_CATEGORY, category);
 	    
@@ -123,7 +128,16 @@ public class FoodItemDataSource {
 		item.setId(cursor.getLong(0));
 		item.setName(cursor.getString(1));
 		
-		item.setDate(new Date(Date.parse(cursor.getString(2))));
+		
+		try {
+			String date_string = cursor.getString(2);
+			Date date = FoodItem.database_format.parse(date_string);
+			item.setDate(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		
 		item.setNotificationSetting(cursor.getInt(3));
 		item.setCategory(cursor.getInt(4));

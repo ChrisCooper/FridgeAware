@@ -90,6 +90,26 @@ public class EditItemActivity extends Activity {
 			}
 		});
 		
+		//Remoce Button...
+		Button removeButton = (Button) findViewById(R.id.edit_button_remove);
+		
+		removeButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				FoodItemDataSource datasource = new FoodItemDataSource(EditItemActivity.this);
+				datasource.open();
+		        
+		        datasource.deleteFoodItem(foodItem);
+		        
+		        datasource.close();
+				
+				finish();
+				
+			}
+		});
+		
 	}
 
 	/**
