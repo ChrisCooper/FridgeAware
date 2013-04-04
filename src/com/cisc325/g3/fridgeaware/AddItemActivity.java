@@ -56,7 +56,7 @@ public class AddItemActivity extends Activity {
 				Spinner spinner = (Spinner) findViewById(R.id.add_spinner_notifications);
 				int notificationSetting = spinner.getSelectedItemPosition();
 		
-				long expiryWarningDays = 1;
+				long expiryWarningDays = notificationSetting == 0 ? 7 : 1;
 				Date notificationDate = new Date(expiryDate.getTime() - expiryWarningDays * 24 * 60 * 60 * 1000); 
 
 				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
