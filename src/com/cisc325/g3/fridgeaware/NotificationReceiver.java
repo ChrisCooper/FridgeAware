@@ -26,7 +26,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         mNM = (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
         // Set the icon, scrolling text and timestamp
        
-        Notification notification = new Notification(R.drawable.ic_launcher, "Test Alarm",
+        Notification notification = new Notification(R.drawable.ic_launcher, foodItem.getName() + " will expire soon",
         System.currentTimeMillis());
         
         // The PendingIntent to launch our activity if the user selects this notification
