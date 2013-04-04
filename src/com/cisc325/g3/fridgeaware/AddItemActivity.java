@@ -52,17 +52,20 @@ public class AddItemActivity extends Activity {
 				Date expiryDate = new Date(expiryPicker.getYear() - 1900,
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
-				
+		
 				Spinner spinner = (Spinner) findViewById(R.id.add_spinner_notifications);
 				int notificationSetting = spinner.getSelectedItemPosition();
-				
+		
+				long expiryWarningDays = 1;
+				Date notificationDate = new Date(expiryDate.getTime() - expiryWarningDays * 24 * 60 * 60 * 1000); 
+
 				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
 		        datasource.open();
 		        
 		        FoodItem foodItem = datasource.createFoodItem(name, expiryDate, notificationSetting);
 		        
 		        NotificationService noteService = new NotificationService(AddItemActivity.this);
-		        noteService.scheduleExpiryWarning(expiryDate, foodItem);
+		        noteService.scheduleExpiryWarning(notificationDate, foodItem);
 		        				
 				finish();
 			}
