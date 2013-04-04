@@ -20,8 +20,7 @@ public class FoodItemDataSource {
 	private String[] allColumns = { FridgeDBHelper.FOODITEM_COLUMN_ID,
 			FridgeDBHelper.FOODITEM_COLUMN_NAME,
 			FridgeDBHelper.FOODITEM_COLUMN_EXPIRY,
-			FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING,
-			FridgeDBHelper.FOODITEM_COLUMN_CATEGORY};
+			FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING};
 	
 	public FoodItemDataSource(Context context) {
 		dbHelper = new FridgeDBHelper(context);
@@ -82,7 +81,7 @@ public class FoodItemDataSource {
 		
 	}
 	
-	public FoodItem createFoodItem(String name, Date expiryDate, int notificationSetting, int category) {
+	public FoodItem createFoodItem(String name, Date expiryDate, int notificationSetting) {
 	    ContentValues values = new ContentValues();
 	    
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NAME, name);
@@ -91,7 +90,6 @@ public class FoodItemDataSource {
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, date_string);
 	    
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING, notificationSetting);
-	    values.put(FridgeDBHelper.FOODITEM_COLUMN_CATEGORY, category);
 	    
 	    long insertId = database.insertOrThrow(FridgeDBHelper.FOODITEM_TABLE_NAME, null,
 	        values);
@@ -109,7 +107,7 @@ public class FoodItemDataSource {
 	    return newItem;
 	}
 	
-	public void updateFoodItem(long id, String name, Date expiryDate, int notificationSetting, int category) {
+	public void updateFoodItem(long id, String name, Date expiryDate, int notificationSetting) {
 		
 		ContentValues values = new ContentValues();
 	    
@@ -117,7 +115,6 @@ public class FoodItemDataSource {
 	    String date_string = FoodItem.database_format.format(expiryDate);
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_EXPIRY, date_string);
 	    values.put(FridgeDBHelper.FOODITEM_COLUMN_NOTIFICATION_SETTING, notificationSetting);
-	    values.put(FridgeDBHelper.FOODITEM_COLUMN_CATEGORY, category);
 	    
 	    database.update(FridgeDBHelper.FOODITEM_TABLE_NAME, values, FridgeDBHelper.FOODITEM_COLUMN_ID + " = " + id, null);
 		
@@ -147,7 +144,6 @@ public class FoodItemDataSource {
 	
 		
 		item.setNotificationSetting(cursor.getInt(3));
-		item.setCategory(cursor.getInt(4));
 		
 	    return item;
 	}

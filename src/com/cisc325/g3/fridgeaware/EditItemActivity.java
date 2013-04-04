@@ -69,7 +69,7 @@ public class EditItemActivity extends Activity {
 				FoodItemDataSource datasource = new FoodItemDataSource(EditItemActivity.this);
 		        datasource.open();
 		        
-		        datasource.updateFoodItem(foodItem.getId(), name, expiryDate, 0, 0);
+		        datasource.updateFoodItem(foodItem.getId(), name, expiryDate, 0);
 		        
 		        datasource.close();
 				

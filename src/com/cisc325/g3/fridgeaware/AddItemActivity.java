@@ -48,16 +48,18 @@ public class AddItemActivity extends Activity {
 				EditText nameEditText = (EditText) findViewById(R.id.add_name);
 				String name = nameEditText.getText().toString();
 				
-				DatePicker expiryPicker = (DatePicker) findViewById(R.id.add_picker_expiry);
-				
+				DatePicker expiryPicker = (DatePicker) findViewById(R.id.add_picker_expiry);	
 				Date expiryDate = new Date(expiryPicker.getYear() - 1900,
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
 				
+				Spinner spinner = (Spinner) findViewById(R.id.add_spinner_notifications);
+				int notificationSetting = spinner.getSelectedItemPosition();
+				
 				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
 		        datasource.open();
 		        
-		        FoodItem foodItem = datasource.createFoodItem(name, expiryDate, 0, 0);
+		        FoodItem foodItem = datasource.createFoodItem(name, expiryDate, notificationSetting);
 		        
 		        NotificationService noteService = new NotificationService(AddItemActivity.this);
 		        noteService.scheduleExpiryWarning(expiryDate, foodItem);

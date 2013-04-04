@@ -41,18 +41,6 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content" />
 	    
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/edit_category_label" />
-	    
-	    <EditText
-	        android:id="@+id/edit_text_category"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginRight="220dp"
-	        android:hint="@string/edit_category_hint" />
-	    
 	    <LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"

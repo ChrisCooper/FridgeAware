@@ -18,7 +18,6 @@ public class FridgeDBHelper extends SQLiteOpenHelper {
 	public static final String FOODITEM_COLUMN_NAME = "name";
 	public static final String FOODITEM_COLUMN_EXPIRY = "expiry";
 	public static final String FOODITEM_COLUMN_NOTIFICATION_SETTING = "notification_setting";
-	public static final String FOODITEM_COLUMN_CATEGORY = "category";
 	
 	
 	// Database creation sql statement
@@ -27,8 +26,7 @@ public class FridgeDBHelper extends SQLiteOpenHelper {
 	    	+ FOODITEM_COLUMN_ID + " integer primary key autoincrement, "
 		    + FOODITEM_COLUMN_NAME + " text not null, "
 		    + FOODITEM_COLUMN_EXPIRY + " text not null, "
-		    + FOODITEM_COLUMN_NOTIFICATION_SETTING + " integer not null, "
-		    + FOODITEM_COLUMN_CATEGORY + " integer not null"
+		    + FOODITEM_COLUMN_NOTIFICATION_SETTING + " integer not null "
 	    + ");";
 
 	
