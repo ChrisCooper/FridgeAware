@@ -4,6 +4,7 @@
 *.dex
 
 *.class
+*.DS_Store
 
 bin/
 gen/

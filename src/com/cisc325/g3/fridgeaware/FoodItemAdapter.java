@@ -1,10 +1,12 @@
 package com.cisc325.g3.fridgeaware;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,18 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem>{
         
         FoodItem foodItem = foodItems.get(position);
         holder.txtTitle.setText(foodItem.getName());
+        
+        if(foodItem.getDate().before(new Date())) {
+        	holder.txtTitle.setTextColor(Color.RED);
+        	holder.expiryTitle.setTextColor(Color.RED);
+        	row.setBackgroundColor(Color.argb(255, 255, 235, 235));
+        }
+        else {
+        	holder.txtTitle.setTextColor(Color.BLACK);
+        	holder.expiryTitle.setTextColor(Color.BLACK);
+        	row.setBackgroundColor(Color.WHITE);
+        }
+        
         holder.expiryTitle.setText(foodItem.getDateString());
         holder.foodItem = foodItem;
         
