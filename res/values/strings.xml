@@ -19,8 +19,8 @@
     <string name="search_hint">Search food items</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
-    <string name="button_sortalpha">Sort ABC</string>
-    <string name="button_sortexpiry">Sort by expiry</string>
+    <string name="button_sortalpha">Sort Alphabetically</string>
+    <string name="button_sortexpiry">Sort by Expiry Date</string>
     <string name="title_activity_searchable">SearchableActivity</string>
     <string name="title_activity_edit_item">Edit Food Item</string>
 

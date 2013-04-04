@@ -35,7 +35,7 @@ public class EditItemActivity extends Activity {
 		foodItem = datasource.getFoodItem(getIntent().getLongExtra("ID",-1));
 		
 		((EditText) findViewById(R.id.edit_name)).setText((CharSequence)foodItem.getName());
-		((DatePicker) findViewById(R.id.edit_picker_expiry)).updateDate(foodItem.getDate().getYear(),
+		((DatePicker) findViewById(R.id.edit_picker_expiry)).updateDate(foodItem.getDate().getYear() + 1900,
 				foodItem.getDate().getMonth(),
 				foodItem.getDate().getDate());
 		
