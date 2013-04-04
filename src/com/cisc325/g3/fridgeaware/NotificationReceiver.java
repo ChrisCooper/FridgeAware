@@ -23,6 +23,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, FoodItemListActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         // Set the info for the views that show in the notification panel.
         notification.setLatestEventInfo(context, context.getText(R.string.app_name), "This is a Test Alarm", contentIntent);
+        //notification.setLatestEventInfo(context, context.getText(R.string.app_name), "This is a Test Alarm", PendingIntent.getActivity(context, 0, null, 0));
         // Send the notification.
         // We use a layout id because it is a unique number. We use it later to cancel.
         mNM.notify(R.string.app_name, notification);

@@ -50,11 +50,9 @@ public class AddItemActivity extends Activity {
 				
 				DatePicker expiryPicker = (DatePicker) findViewById(R.id.add_picker_expiry);
 				
-				Date expiryDate = new Date(2013,//expiryPicker.getYear(),
+				Date expiryDate = new Date(expiryPicker.getYear() - 1900,
 						expiryPicker.getMonth(),
 						expiryPicker.getDayOfMonth());
-				expiryDate.setHours(19);
-				expiryDate.setMinutes(22);
 				
 				FoodItemDataSource datasource = new FoodItemDataSource(AddItemActivity.this);
 		        datasource.open();

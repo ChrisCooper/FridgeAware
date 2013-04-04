@@ -57,6 +57,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cisc325.g3.fridgeaware.FoodItemListActivity" />
         </activity>
+        
+        <receiver
+            android:process=":remote"
+            android:name="NotificationReceiver">
+            
+        </receiver>
     </application>
 
 </manifest>

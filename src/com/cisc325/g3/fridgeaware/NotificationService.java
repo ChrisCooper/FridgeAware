@@ -23,11 +23,13 @@ public class NotificationService {
         intent.putExtra("foodItemID", foodItem.getId());
         mAlarmSender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         
-        //long notificationTime = date.getTime();
+        Date now = new Date();
         
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.SECOND, 5);
-        long notificationTime = c.getTimeInMillis();
+        date.setHours(now.getHours());
+        date.setMinutes(now.getMinutes());
+        date.setSeconds(now.getSeconds()+15);
+        
+        long notificationTime = date.getTime();       
         
         // Schedule the alarm!
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
