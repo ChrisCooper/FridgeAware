@@ -35,13 +35,20 @@ public class FoodItemDataSource {
 		dbHelper.close();
 	}
 
-	public List<FoodItem> getAllFoodItems() {
+	public List<FoodItem> getAllFoodItems(boolean useAlphaSort) {
 		
 		List<FoodItem> items = new ArrayList<FoodItem>();
 
-	    Cursor cursor = database.query(FridgeDBHelper.FOODITEM_TABLE_NAME,
-	    		allColumns, null, null, null, null, FridgeDBHelper.FOODITEM_COLUMN_EXPIRY);
-	    
+		Cursor cursor;
+		
+		if (useAlphaSort){
+			cursor = database.query(FridgeDBHelper.FOODITEM_TABLE_NAME,
+		    		allColumns, null, null, null, null, FridgeDBHelper.FOODITEM_COLUMN_NAME);
+		} else {
+			cursor = database.query(FridgeDBHelper.FOODITEM_TABLE_NAME,
+		    		allColumns, null, null, null, null, FridgeDBHelper.FOODITEM_COLUMN_EXPIRY);
+		}
+		
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
 	    	FoodItem item = cursorToFoodItem(cursor);

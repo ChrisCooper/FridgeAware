@@ -27,6 +27,8 @@ public class FoodItemListActivity extends Activity {
 
 	private ArrayAdapter<FoodItem> adapter;
 	private FoodItemDataSource datasource;
+	private boolean useAlphaSort;
+	private Button sortButton;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +67,32 @@ public class FoodItemListActivity extends Activity {
         	
 		});
         
+        sortButton = (Button) findViewById(R.id.button_sortalpha);
+        
+        sortButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FoodItemListActivity.this.toogleSort();
+			}
+		});
+        
         dBUpdateArrayAdapter();
         
     }
     
-    @Override
+    protected void toogleSort() {
+		useAlphaSort = !useAlphaSort;
+		if (useAlphaSort) {
+			sortButton.setText(R.string.button_sortexpiry);
+		} else {
+			sortButton.setText(R.string.button_sortalpha);
+		}
+		
+		dBUpdateArrayAdapter();
+	}
+
+	@Override
     public void onResume() {
     	
     	//dBUpdateArrayAdapter();
@@ -161,7 +184,7 @@ public class FoodItemListActivity extends Activity {
     	datasource = new FoodItemDataSource(this);
         datasource.open();
     	
-    	List<FoodItem> items = datasource.getAllFoodItems();
+    	List<FoodItem> items = datasource.getAllFoodItems(useAlphaSort);
         
         //Populate ListView...
         ListView listview = (ListView) findViewById(R.id.foodlist);
